@@ -15,6 +15,16 @@ def breadthFirstBorkR(V, E, map):
    Dnew = D + [ NS_out(Vnew, E, D[-1]) ]  # D_{j} = N_{V_j}(D_{j-1})
    return distanceClassesR(Vnew, E, Dnew)
 
+   saveNo = bork.save()
+   oldLoc
+   for e in exits :
+      bork.move(e)
+      newloc = bork.description
+      if newloc in set(map.keys()):
+         bork.restore(saveNo)
+      else:
+         breadthFirstBorkR(bork, map)
+
 
 def traverseBork(bork):
    # code your solution here
@@ -28,11 +38,7 @@ def traverseBork(bork):
 
    saveNo = bork.save()
    exits = bork.exits()
-   for e in exits :
-      bork.move(e)
-      loc = bork.description
-      if loc in set(map.keys()):
-         bork.restore(saveNo)
+   
    //visit exit
    //if 
 
