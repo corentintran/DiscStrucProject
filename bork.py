@@ -6,21 +6,21 @@ import digraphs
 def traverseBorkR(bork, map, oldSave):
    
    currentSave = bork.save()
-   oldLoc = bork.description()
-   exits = bork.(exits)
-   map[bork.description()] = {}
+   currentLoc = bork.description()
+   exits = bork.exits()
+   map[currentLoc] = {}
 
    for e in exits :
       #for each exit we move into it and update the map with the exit location
       bork.move(e)
       newloc = bork.description
-      map[oldLoc][e] = newloc
-      if newloc in set(map.keys()):
+      map[current][e] = newloc
+      if newloc in map:
          #if the location is already in the map we go back to the precedent location
          bork.restore(currentSave)
       else:
          #else we use the recurrent function to explore from this new location
-         traverseBorkR(bork, map)
+         traverseBorkR(bork, map, currentSave)
    #we have explored all the path from this current location, we go back to the old one
    restore(oldSave)
 
