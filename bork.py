@@ -2,59 +2,36 @@ import graphs
 import digraphs
 
 # You can define some helper functions here if you like!
-def breadthFirstBork(V, E, map):
-     V0 = V              # V_0 = V
-   D = [ {u} ]         # D[0] = D_0 = {u}
-   return distanceClassesR(V0, E, D)
 
+def traverseBorkR(bork, map, oldSave):
+   
+   currentSave = bork.save()
+   oldLoc = bork.description()
+   exits = bork.(exits)
+   map[bork.description()] = {}
 
-
-def breadthFirstBorkR(V, E, map):
-   Vnew = V - D[-1]            # V_{j} = V_{j-1} / D_{j-1}
-   if len(Vnew) == 0: return D # Already considered all elements?
-   Dnew = D + [ NS_out(Vnew, E, D[-1]) ]  # D_{j} = N_{V_j}(D_{j-1})
-   return distanceClassesR(Vnew, E, Dnew)
-
-   saveNo = bork.save()
-   oldLoc
    for e in exits :
+      #for each exit we move into it and update the map with the exit location
       bork.move(e)
       newloc = bork.description
+      map[oldLoc][e] = newloc
       if newloc in set(map.keys()):
-         bork.restore(saveNo)
+         #if the location is already in the map we go back to the precedent location
+         bork.restore(currentSave)
       else:
-         breadthFirstBorkR(bork, map)
+         #else we use the recurrent function to explore from this new location
+         traverseBorkR(bork, map)
+   #we have explored all the path from this current location, we go back to the old one
+   restore(oldSave)
 
 
 def traverseBork(bork):
    # code your solution here
 
    map = {}
-   bork.__init__()
-
-   E = bork.exits()
-
-   breadthFirstBorkR(bork, map)
-
-   saveNo = bork.save()
-   exits = bork.exits()
+   initSave = bork.save()
+   traverseBorkR(bork, map, initSave)
    
-   //visit exit
-   //if 
-
-   # Access the bork automator like so:
-   bork.restart()
-   location = bork.description()
-   exits = bork.exits()
-   exit = "???"
-   bork.move(exit)
-   saveGame = bork.save()
-   bork.restore(saveGame)
-
-   # Access functions from the imported files like this:
-   n = graphs.N(V, E, u)
-   t = digraphs.topOrdering(V, E)
-
    return map
 
 # To play in hard core mode, define the function traverseBorkHardCore(bork)
