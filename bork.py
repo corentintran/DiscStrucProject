@@ -13,8 +13,8 @@ def traverseBorkR(bork, map, oldSave):
    for e in exits :
       #for each exit we move into it and update the map with the exit location
       bork.move(e)
-      newloc = bork.description
-      map[current][e] = newloc
+      newloc = bork.description()
+      map[currentLoc][e] = newloc
       if newloc in map:
          #if the location is already in the map we go back to the precedent location
          bork.restore(currentSave)
@@ -22,7 +22,7 @@ def traverseBorkR(bork, map, oldSave):
          #else we use the recurrent function to explore from this new location
          traverseBorkR(bork, map, currentSave)
    #we have explored all the path from this current location, we go back to the old one
-   restore(oldSave)
+   bork.restore(oldSave)
 
 
 def traverseBork(bork):
